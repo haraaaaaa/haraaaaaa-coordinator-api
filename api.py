@@ -26,18 +26,21 @@ param = f'?serviceKey={service_key}&' + parse.urlencode({
 })
 
 response = requests.get(url + param)
-print(url + param)  # API url을 출력합니다. 클릭하면 바로 웹페이지로 실행됩니다.
-# JSON 파일을 제대로 보려면 크롬 JSON 뷰어 확장프로그램 설치가 필요합니다.
 
 jsonObject = json.loads(response.text)
 send_data = jsonObject.get("response").get("body").get("items").get("item")
 JSONsting = json.dumps(send_data)
 
 
-async def connect():
-    async with websockets.connect("ws://localhost:9998/websocket") as websocket:
-        await websocket.send(JSONsting);
-        print("Data send completed");
+async def accept(websocket, path):
+    getRequest = await websocket.recv(); # 프로세스 서버로부터 getRequest를 받습니다. getRequst를 따로 사용하진 않았습니다.
+    print("GET Request Received"); # 정상적으로 요청을 받았음을 출력합니다.
+    await websocket.send(JSONsting); # 요청을 받았으니 다시 JSON 데이터를 송부합니다.
+    print("JSON data Successfully Sent"); # 정상적으로 JSON 파일을 보냈음을 출력합니다.
 
-# 비동기로 서버에 접속한다.
-asyncio.get_event_loop().run_until_complete(connect())
+start_server = websockets.serve(accept, "localhost", 9998); # localhost 9998번 포트를 통해 통신을 합니다.
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(start_server);
+loop.run_forever();
+

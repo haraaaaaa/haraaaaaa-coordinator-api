@@ -8,7 +8,7 @@ import websockets
 
 # 공공데이터 포털 단기예보 API
 # 서비스 키와 URL
-service_key = "---"
+service_key = "BLWS9PdbSrtSL0vf%2BjBIADd695SRxWjNhtTja27KMP6oBdZRsnODs%2BeNaJSFJmvn1h7eGvbm8Vp64ftV552yMw%3D%3D"
 url = f"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
 
 # API에서 당일 예보를 가져오기 위해 오늘 날짜를 변수에 선언하였습니다.

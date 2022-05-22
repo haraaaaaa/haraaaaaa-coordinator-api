@@ -7,7 +7,7 @@ from pytz import timezone
 import requests
 from urllib import parse
 
-Weather_api_key = "jH0An1qY9CMkpEeegHsTRWpnK1xiJawJfuc4Y6wk3Nz66dpcKvZqPjT9yO4TWGc5XmJKf%2F9uLy8cVI264hsrSw%3D%3D"                                                               #
+Weather_api_key = "---"                                                               #
 Weather_url = f"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
 
 @api.route('/weather',methods=['GET'])
@@ -33,11 +33,11 @@ def weather():
         JSONstring = json.dumps(send_data)
         return jsonify(send_data)
     
-# @api.route('/todos',methods=['GET','POST'])
-# def todos():
+# @api.route('/slack',methods=['GET','POST'])
+# def slack():
 #     if request.method=='POST':
-#         res = requests.post('https://hooks.slack.com/services/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',
-#         json={'text':'Hello World'}, headers={'Content-Type':'application/json'})
+#         res = requests.post('webhook url',
+#         json={}, headers={'Content-Type':'application/json'})
 
 #     elif request.method == 'GET':
 #         pass
